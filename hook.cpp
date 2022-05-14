@@ -6,13 +6,8 @@ Dictionary Hook::GetTable() {
 	return table;
 }
 
-void Hook::Create(String name) {
-	Dictionary newHook = Dictionary();
-	table[name] = newHook;
-}
-
 void Hook::Add(String event, String uid, Ref<FuncRef> function) {
-	Dictionary tmp = table[event];
+	Dictionary tmp = table.get(event, Dictionary());
 	tmp[uid] = function;
 	table[event] = tmp;
 }
@@ -47,7 +42,6 @@ void Hook::Remove(String event, String uid) {
 
 void Hook::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("GetTable"), &Hook::GetTable);
-	ClassDB::bind_method(D_METHOD("Create", "name"), &Hook::Create);
 	ClassDB::bind_method(D_METHOD("Add", "event", "uid", "function"), &Hook::Add);
 	ClassDB::bind_method(D_METHOD("Call", "event", "args"), &Hook::Call);
 	ClassDB::bind_method(D_METHOD("Remove", "event", "uid"), &Hook::Remove);

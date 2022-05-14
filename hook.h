@@ -19,7 +19,6 @@ protected:
 	
 public:
 	Dictionary GetTable();
-	void Create(String name);
 	void Add(String event, String uid, Ref<FuncRef> function);
 	void Call(String event, Array args);
 	void Remove(String event, String uid);
