@@ -27,6 +27,8 @@ hook.Remove(event: String, uid: String)
 ```gdscript
 # autorun.gd
 
+var hook: Hook = Hook.new()
+
 func printHookOutput1(a: String, b: String):
     print(a, " ", b)
     
