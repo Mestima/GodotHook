@@ -46,7 +46,7 @@ func _ready():
 `hook.Remove` removes any listening event by its name and type:
 
 ```gdscript
-# can be executed in any place
+# can be executed at any place
 
 hook.Remove("OnReady", "UniqueName")
 ```
@@ -54,7 +54,7 @@ hook.Remove("OnReady", "UniqueName")
 `hook.GetTable` returns a `Dictionary` with all added listening events
 
 ```gdscript
-# can be executed in any place
+# can be executed at any place
 
 var hookTable: Dictionary = hook.GetTable()
 ```
