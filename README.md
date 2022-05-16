@@ -43,7 +43,7 @@ hook.Add("OnReady", "UniqueName2", Callable(self, "printHookOutput2"))
 
 func _ready():
     hook.Call("OnReady", ["Hey!", "It's OnReady hook!"])
-	hook.Call("OnReady", ["Hey!", "It's OnReady hook, but deferred!"], true)
+    hook.Call("OnReady", ["Hey!", "It's OnReady hook, but deferred!"], true)
 ```
 
 `hook.Remove` removes any listening event by its name and type:
