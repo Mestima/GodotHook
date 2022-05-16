@@ -17,7 +17,7 @@ Example compilation `Windows` command: `scons p=windows tools=yes -j4`
 ```gdscript
 hook.GetTable()
 hook.Add(event: String, uid: String, function: Callable)
-hook.Call(event: String, args: Array)
+hook.Call(event: String, args: Array, defer: bool = false)
 hook.Remove(event: String, uid: String)
 ```
 
@@ -43,6 +43,7 @@ hook.Add("OnReady", "UniqueName2", Callable(self, "printHookOutput2"))
 
 func _ready():
     hook.Call("OnReady", ["Hey!", "It's OnReady hook!"])
+	hook.Call("OnReady", ["Hey!", "It's OnReady hook, but deferred!"], true)
 ```
 
 `hook.Remove` removes any listening event by its name and type:

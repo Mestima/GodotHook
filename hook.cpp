@@ -12,7 +12,7 @@ void Hook::Add(String event, String uid, Callable function) {
 	table[event] = tmp;
 }
 
-void Hook::Call(String event, Array args) {
+void Hook::Call(String event, Array args, bool defer = false) {
 	const Variant **argptrs = nullptr;
 	if (args.size() > 0) {
 		argptrs = (const Variant **)alloca(sizeof(Variant *) * args.size());
@@ -27,7 +27,12 @@ void Hook::Call(String event, Array args) {
 			Array keys = tmp.keys();
 			for (int key_i = 0; key_i < keys.size(); key_i++) {
 				Callable function = tmp[keys[key_i]];
-				function.call_deferred(argptrs, args.size());
+				if (!defer) {
+					Callable::CallError call_error;
+					function.call(argptrs, args.size(), Variant(), call_error);
+				} else {
+					function.call_deferred(argptrs, args.size());
+				}
 			}
 		} else {
 			ERR_PRINT("Hook event '" + event + "' cannot be found or empty.");
@@ -51,7 +56,7 @@ void Hook::Remove(String event, String uid) {
 void Hook::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("GetTable"), &Hook::GetTable);
 	ClassDB::bind_method(D_METHOD("Add", "event", "uid", "function"), &Hook::Add);
-	ClassDB::bind_method(D_METHOD("Call", "event", "args"), &Hook::Call);
+	ClassDB::bind_method(D_METHOD("Call", "event", "args", "defer"), &Hook::Call, DEFVAL(false));
 	ClassDB::bind_method(D_METHOD("Remove", "event", "uid"), &Hook::Remove);
 };
 

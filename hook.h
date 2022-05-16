@@ -21,7 +21,7 @@ protected:
 public:
 	Dictionary GetTable();
 	void Add(String event, String uid, Callable function);
-	void Call(String event, Array args);
+	void Call(String event, Array args, bool defer);
 	void Remove(String event, String uid);
     Hook();
 };
