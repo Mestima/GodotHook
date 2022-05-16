@@ -5,7 +5,7 @@
 | Godot version | Supported | Branch |
 | - | - | - |
 | 3.x | yes | 3.x |
-| 4.x | not yet | main |
+| 4.x | yes | main |
 
 ## Compilation
 - Download GodotHook and place it to the Godot `modules` folder.
