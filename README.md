@@ -2,10 +2,10 @@
  A lite custom event system for Godot Engine
  
 ## Supported versions
-| Godot version | Supported |
-| - | - |
-| 3.x | yes |
-| 4.x | not yet |
+| Godot version | Supported | Branch |
+| - | - | - |
+| 3.x | yes | 3.x |
+| 4.x | not yet | main |
 
 ## Compilation
 - Download GodotHook and place it to the Godot `modules` folder.
