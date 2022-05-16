@@ -1,14 +1,17 @@
 /* register_types.cpp */
 
 #include "register_types.h"
-
-#include "core/class_db.h"
+#include "core/object/class_db.h"
 #include "hook.h"
 
-void register_hook_types() {
-    ClassDB::register_class<Hook>();
+void initialize_hook_module(ModuleInitializationLevel p_level) {
+	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
+		ClassDB::register_class<Hook>();
+	}
 }
 
-void unregister_hook_types() {
-   // Nothing to do here in this example.
+void uninitialize_hook_module(ModuleInitializationLevel p_level) {
+	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
+		return;
+	}
 }

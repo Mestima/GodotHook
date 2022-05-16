@@ -2,10 +2,10 @@
  A lite custom event system for Godot Engine
  
 ## Supported versions
-| Godot version | Supported |
-| - | - |
-| 3.x | yes |
-| 4.x | not yet |
+| Godot version | Supported | Branch |
+| - | - | - |
+| 3.x | yes | 3.x |
+| 4.x | yes | main |
 
 ## Compilation
 - Download GodotHook and place it to the Godot `modules` folder.
@@ -16,7 +16,7 @@ Example compilation `Windows` command: `scons p=windows tools=yes -j4`
 ## Methods
 ```gdscript
 hook.GetTable()
-hook.Add(event: String, uid: String, function: FuncRef)
+hook.Add(event: String, uid: String, function: Callable)
 hook.Call(event: String, args: Array)
 hook.Remove(event: String, uid: String)
 ```
@@ -35,8 +35,8 @@ func printHookOutput1(a: String, b: String):
 func printHookOutput2(a: String, b: String):
     print(a, " ", b)
 
-hook.Add("OnReady", "UniqueName1", funcref(self, "printHookOutput1"))
-hook.Add("OnReady", "UniqueName2", funcref(self, "printHookOutput2"))
+hook.Add("OnReady", "UniqueName1", Callable(self, "printHookOutput1"))
+hook.Add("OnReady", "UniqueName2", Callable(self, "printHookOutput2"))
 ```
 ```gdscript
 # any node script

@@ -6,20 +6,28 @@ Dictionary Hook::GetTable() {
 	return table;
 }
 
-void Hook::Add(String event, String uid, Ref<FuncRef> function) {
+void Hook::Add(String event, String uid, Callable function) {
 	Dictionary tmp = table.get(event, Dictionary());
 	tmp[uid] = function;
 	table[event] = tmp;
 }
 
-void Hook::Call(String event, Array args = Array()) {
+void Hook::Call(String event, Array args) {
+	const Variant **argptrs = nullptr;
+	if (args.size() > 0) {
+		argptrs = (const Variant **)alloca(sizeof(Variant *) * args.size());
+		for (int i = 0; i < args.size(); i++) {
+			argptrs[i] = &args[i];
+		}
+	}
+	
 	for (int i = 0; i < table.size(); i++) {
 		Dictionary tmp = table.get(event, Dictionary());
-		if (!tmp.empty()) {
+		if (!tmp.is_empty()) {
 			Array keys = tmp.keys();
 			for (int key_i = 0; key_i < keys.size(); key_i++) {
-				Ref<FuncRef> function = tmp[keys[key_i]];
-				function->call_funcv(args);
+				Callable function = tmp[keys[key_i]];
+				function.call_deferred(argptrs, args.size());
 			}
 		} else {
 			ERR_PRINT("Hook event '" + event + "' cannot be found or empty.");
@@ -29,7 +37,7 @@ void Hook::Call(String event, Array args = Array()) {
 
 void Hook::Remove(String event, String uid) {
 	Dictionary tmp = table.get(event, Dictionary());
-	if (!tmp.empty()) {
+	if (!tmp.is_empty()) {
 		if (tmp.erase(uid)) {
 			table[event] = tmp;
 		} else {
