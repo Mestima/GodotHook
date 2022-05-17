@@ -9,6 +9,7 @@
 
 ## Compilation
 - Download GodotHook and place it to the Godot `modules` folder.
+- Rename `GodotHook-master` to `GodotHook`
 - Compile Godot like usual using one of [these guides](https://docs.godotengine.org/en/stable/development/compiling/index.html).
 
 Example compilation `Windows` command: `scons p=windows tools=yes -j4`
