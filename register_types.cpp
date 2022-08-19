@@ -5,10 +5,10 @@
 #include "core/class_db.h"
 #include "hook.h"
 
-void register_hook_types() {
+void register_GodotHook_types() {
     ClassDB::register_class<Hook>();
 }
 
-void unregister_hook_types() {
+void unregister_GodotHook_types() {
    // Nothing to do here in this example.
 }
