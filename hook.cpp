@@ -29,9 +29,9 @@ void Hook::Call(String event, Array args, bool defer = false) {
 				Callable function = tmp[keys[key_i]];
 				if (!defer) {
 					Callable::CallError call_error;
-					function.call(argptrs, args.size(), Variant(), call_error);
+					function.callp(argptrs, args.size(), Variant(), call_error);
 				} else {
-					function.call_deferred(argptrs, args.size());
+					function.call_deferredp(argptrs, args.size());
 				}
 			}
 		} else {
