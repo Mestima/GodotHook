@@ -62,3 +62,7 @@ hook.Remove("OnReady", "UniqueName")
 
 var hookTable: Dictionary = hook.GetTable()
 ```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Mestima/GodotHook&type=Date)](https://star-history.com/#Mestima/GodotHook&Date)
