@@ -18,7 +18,7 @@ Example compilation `Windows` command: `scons p=windows tools=yes -j4`
 ```gdscript
 hook.GetTable()
 hook.Add(event: String, uid: String, function: Callable)
-hook.Call(event: String, args: Array, defer: bool = false)
+hook.Call(event: String, args: Array = [], defer: bool = false)
 hook.Remove(event: String, uid: String)
 ```
 
