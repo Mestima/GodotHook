@@ -21,22 +21,20 @@ void Hook::Call(String event, Array args = Array(), bool defer = false) {
 		}
 	}
 	
-	for (int i = 0; i < table.size(); i++) {
-		Dictionary tmp = table.get(event, Dictionary());
-		if (!tmp.is_empty()) {
-			Array keys = tmp.keys();
-			for (int key_i = 0; key_i < keys.size(); key_i++) {
-				Callable function = tmp[keys[key_i]];
-				if (!defer) {
-					Callable::CallError call_error;
-					function.callp(argptrs, args.size(), Variant(), call_error);
-				} else {
-					function.call_deferredp(argptrs, args.size());
-				}
+	Dictionary tmp = table.get(event, Dictionary());
+	if (!tmp.is_empty()) {
+		Array keys = tmp.keys();
+		for (int key_i = 0; key_i < keys.size(); key_i++) {
+			Callable function = tmp[keys[key_i]];
+			if (!defer) {
+				Callable::CallError call_error;
+				function.callp(argptrs, args.size(), Variant(), call_error);
+			} else {
+				function.call_deferredp(argptrs, args.size());
 			}
-		} else {
-			ERR_PRINT("Hook event '" + event + "' cannot be found or empty.");
 		}
+	} else {
+		ERR_PRINT("Hook event '" + event + "' cannot be found or empty.");
 	}
 }
 
