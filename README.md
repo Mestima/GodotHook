@@ -16,14 +16,14 @@ Example compilation `Windows` command: `scons p=windows tools=yes -j4`
 
 ## Methods
 ```gdscript
-hook.getTable()
-hook.add(event: String, uid: String, function: Callable)
-hook.call(event: String, args: Array = [], defer: bool = false)
-hook.remove(event: String, uid: String)
+hook.GetTable()
+hook.Add(event: String, uid: String, function: Callable)
+hook.Call(event: String, args: Array = [], defer: bool = false)
+hook.Remove(event: String, uid: String)
 ```
 
 ## Usage
-`hook.add` creates a new listening event and `hook.call` executes all listening events of the same type, for example:
+`hook.Add` creates a new listening event and `hook.Call` executes all listening events of the same type, for example:
 
 ```gdscript
 # autorun.gd
@@ -36,31 +36,31 @@ func printHookOutput1(a: String, b: String):
 func printHookOutput2(a: String, b: String):
     print(a, " ", b)
 
-hook.add("OnReady", "UniqueName1", Callable(self, "printHookOutput1"))
-hook.add("OnReady", "UniqueName2", Callable(self, "printHookOutput2"))
+hook.Add("OnReady", "UniqueName1", Callable(self, "printHookOutput1"))
+hook.Add("OnReady", "UniqueName2", Callable(self, "printHookOutput2"))
 ```
 ```gdscript
 # any node script
 
 func _ready():
-    hook.call("OnReady", ["Hey!", "It's OnReady hook!"])
-    hook.call("OnReady", ["Hey!", "It's OnReady hook, but deferred!"], true)
+    hook.Call("OnReady", ["Hey!", "It's OnReady hook!"])
+    hook.Call("OnReady", ["Hey!", "It's OnReady hook, but deferred!"], true)
 ```
 
-`hook.remove` removes any listening event by its name and type:
+`hook.Remove` removes any listening event by its name and type:
 
 ```gdscript
 # can be executed at any place
 
-hook.remove("OnReady", "UniqueName")
+hook.Remove("OnReady", "UniqueName")
 ```
 
-`hook.getTable` returns a `Dictionary` with all added listening events
+`hook.GetTable` returns a `Dictionary` with all added listening events
 
 ```gdscript
 # can be executed at any place
 
-var hookTable: Dictionary = hook.getTable()
+var hookTable: Dictionary = hook.GetTable()
 ```
 
 ## Star History
