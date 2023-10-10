@@ -1,6 +1,9 @@
 # GodotHook
  A lite custom event system for Godot Engine
  
+## Notes
+- All method names was changed to lowercase (`hook.Add` -> `hook.add`). For old naming use `4.x-capital-literals` branch.
+ 
 ## Supported versions
 | Godot version | Supported | Branch |
 | - | - | - |
