@@ -2,17 +2,17 @@
 
 #include "hook.h"
 
-Dictionary Hook::getTable() {
+Dictionary Hook::GetTable() {
 	return table;
 }
 
-void Hook::add(String event, String uid, Callable function) {
+void Hook::Add(String event, String uid, Callable function) {
 	Dictionary tmp = table.get(event, Dictionary());
 	tmp[uid] = function;
 	table[event] = tmp;
 }
 
-void Hook::call(String event, Array args = Array(), bool defer = false) {
+void Hook::Call(String event, Array args = Array(), bool defer = false) {
 	const Variant **argptrs = nullptr;
 	if (args.size() > 0) {
 		argptrs = (const Variant **)alloca(sizeof(Variant *) * args.size());
@@ -40,7 +40,7 @@ void Hook::call(String event, Array args = Array(), bool defer = false) {
 	}
 }
 
-void Hook::remove(String event, String uid) {
+void Hook::Remove(String event, String uid) {
 	Dictionary tmp = table.get(event, Dictionary());
 	if (!tmp.is_empty()) {
 		if (tmp.erase(uid)) {
@@ -54,10 +54,10 @@ void Hook::remove(String event, String uid) {
 }
 
 void Hook::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("getTable"), &Hook::getTable);
-	ClassDB::bind_method(D_METHOD("add", "event", "uid", "function"), &Hook::add);
-	ClassDB::bind_method(D_METHOD("call", "event", "args", "defer"), &Hook::call, DEFVAL(Array()), DEFVAL(false));
-	ClassDB::bind_method(D_METHOD("remove", "event", "uid"), &Hook::remove);
+	ClassDB::bind_method(D_METHOD("GetTable"), &Hook::GetTable);
+	ClassDB::bind_method(D_METHOD("Add", "event", "uid", "function"), &Hook::Add);
+	ClassDB::bind_method(D_METHOD("Call", "event", "args", "defer"), &Hook::Call, DEFVAL(Array()), DEFVAL(false));
+	ClassDB::bind_method(D_METHOD("Remove", "event", "uid"), &Hook::Remove);
 };
 
 Hook::Hook() {
