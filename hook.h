@@ -19,10 +19,10 @@ protected:
     static void _bind_methods();
 
 public:
-	Dictionary GetTable();
-	void Add(String event, String uid, Callable function);
-	void Call(String event, Array args, bool defer);
-	void Remove(String event, String uid);
+	Dictionary getTable();
+	void add(String event, String uid, Callable function);
+	void call(String event, Array args, bool defer);
+	void remove(String event, String uid);
     Hook();
 };
 
