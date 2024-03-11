@@ -28,7 +28,8 @@ void Hook::Call(String event, Array args = Array(), bool defer = false) {
 			Callable function = tmp[keys[key_i]];
 			if (!defer) {
 				Callable::CallError call_error;
-				function.callp(argptrs, args.size(), Variant(), call_error);
+				Variant r_return_variant = Variant();
+				function.callp(argptrs, args.size(), r_return_variant, call_error);
 			} else {
 				function.call_deferredp(argptrs, args.size());
 			}
